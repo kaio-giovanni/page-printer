@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id "name.remal.sonarlint" version "1.0.189"
+    id "application"
+    id "com.github.jakemarsden.git-hooks" version "0.0.2"
+}
+
+group 'com.soft.kgl'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+ext {
+    javaMainClass = "com.soft.kgl.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
+    implementation 'info.picocli:picocli:4.6.1'
+    implementation group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+sonarlint {
+    ignoreFailures = false
+    excludes {
+        message 'java:S112'
+        message 'java:S2864'
+        message 'java:S1148'
+        message 'Web:S1827'
+        message 'Web:S5256'
+        message 'java:S1301'
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        exceptionFormat = 'full'
+        events "passed", "skipped", "failed"
+        showStandardStreams = (System.getenv('DEBUG') != null)
+    }
+}
+
+gitHooks {
+    hooks = ['pre-commit': 'check']
+}
