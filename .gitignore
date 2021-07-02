@@ -48,4 +48,8 @@ gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
 **/build/
+**/bin/
+**/.settings/
+.project
+.classpath
 .env
