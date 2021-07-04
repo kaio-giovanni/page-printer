@@ -1,10 +1,14 @@
 package com.soft.kgl.page.printer.google;
 
 import com.soft.kgl.page.AbstractPagePrinter;
+import com.soft.kgl.utils.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
 
 public class GoogleSearchPrinter extends AbstractPagePrinter {
 
@@ -19,21 +23,33 @@ public class GoogleSearchPrinter extends AbstractPagePrinter {
 
     @Override
     protected int getPageTimeout () {
-        return 10;
+        return 30;
     }
 
     @Override
     protected ExpectedCondition<Boolean> makeExpectedConditions () {
-        return null;
+        String divBody = "html body div.L3eUgb ";
+        String logoGoogle = divBody + "div.o3j99.LLD4me.yr19Zb.LS8OJ div img";
+        String searchBar = divBody + "div.o3j99.ikrT4e.om7nvf form div div.A8SBwf div div div.a4bIc input";
+        return ExpectedConditions.and(
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By
+                        .cssSelector(divBody)),
+                ExpectedConditions.visibilityOfElementLocated(By
+                        .cssSelector(logoGoogle)),
+                ExpectedConditions.elementToBeClickable(By
+                        .cssSelector(searchBar))
+        );
     }
 
     @Override
     protected WebElement findWebElement () {
-        return null;
+        String elementByCss = "html body div.L3eUgb";
+        return webDriver.findElement(By.cssSelector(elementByCss));
     }
 
     @Override
     protected void processImage (BufferedImage img) {
-        // Do nothing
+        String fileName = String.format("/tmp/google-search-%s.png", LocalDateTime.now());
+        FileUtils.saveImage(fileName, img);
     }
 }
