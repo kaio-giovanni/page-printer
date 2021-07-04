@@ -51,7 +51,7 @@ public class GithubProfilePrinter extends AbstractPagePrinter {
 
     @Override
     protected void processImage (BufferedImage img) {
-        String fileName = "/tmp/github-profile" + LocalDateTime.now() + ".png";
+        String fileName = String.format("/tmp/github-profile-%s.png", LocalDateTime.now());
         FileUtils.saveImage(fileName, img);
     }
 }
