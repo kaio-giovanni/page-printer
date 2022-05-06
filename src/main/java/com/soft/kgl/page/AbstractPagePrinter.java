@@ -22,7 +22,7 @@ public abstract class AbstractPagePrinter implements IPagePrinter {
     private static final Log logger = LogFactory.getLog(AbstractPagePrinter.class);
 
     protected AbstractPagePrinter () {
-        webDriver = DriverMaker.getInstance();
+        webDriver = DriverMaker.getInstance().getWebDriver();
     }
 
     @Override
@@ -30,7 +30,7 @@ public abstract class AbstractPagePrinter implements IPagePrinter {
         logger.info("Initializing ...");
         int pageTimeout = getPageTimeout();
         String pagePath = getPagePath();
-        WebDriverWait wait = new WebDriverWait(webDriver, pageTimeout);
+        var wait = new WebDriverWait(webDriver, pageTimeout);
         navigateTo(pagePath);
         WebElement element = loadWebElement(wait);
         Screenshot screenshot = takePrint(element);
@@ -45,7 +45,7 @@ public abstract class AbstractPagePrinter implements IPagePrinter {
     }
 
     private WebElement loadWebElement (WebDriverWait wait) {
-        logger.info("Trying load web element");
+        logger.info("Trying to load web element");
         int retries = 3;
         while (retries > 0) {
             try {
@@ -54,7 +54,7 @@ public abstract class AbstractPagePrinter implements IPagePrinter {
                 element.click();
                 return element;
             } catch (StaleElementReferenceException e) {
-                logger.info("Reference element is stale, trying re load");
+                logger.info("Reference element is stale, trying reload");
                 retries--;
             }
         }

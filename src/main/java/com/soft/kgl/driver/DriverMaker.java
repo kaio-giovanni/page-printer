@@ -1,41 +1,47 @@
 package com.soft.kgl.driver;
 
-import com.soft.kgl.driver.chrome.ChromeDriverOptions;
-import com.soft.kgl.utils.DotenvUtils;
+import com.soft.kgl.utils.DotEnvUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverMaker {
 
-    private static RemoteWebDriver webDriver;
+    private static DriverMaker instance;
     private static final int SCREEN_WIDTH = 1920;
     private static final int SCREEN_HEIGHT = 1080;
+    private final WebDriver webDriver;
 
     private DriverMaker () {
-        // Do nothing
+        System.setProperty("webdriver.chrome.driver", DotEnvUtils.getChromeDriverUrl());
+        this.webDriver = new ChromeDriver(getOptions());
+        this.webDriver.manage().deleteAllCookies();
+        this.webDriver.manage().window().setSize(getDimension());
     }
 
-    public static RemoteWebDriver getInstance () {
-        if (webDriver == null) {
-            ChromeDriverOptions webDriverOptions = new ChromeDriverOptions();
-            webDriver = new RemoteWebDriver(getRemoteUrlDriver(), webDriverOptions.getOptions());
-            webDriver.manage().deleteAllCookies();
-            webDriver.manage().window().setSize(getDimension());
+    public static DriverMaker getInstance () {
+        if (instance == null) {
+            instance = new DriverMaker();
         }
 
-        return webDriver;
+        return instance;
     }
 
-    private static URL getRemoteUrlDriver () {
-        try {
-            return new URL(DotenvUtils.getChromeDriverUrl());
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+    public WebDriver getWebDriver() {
+        return this.webDriver;
+    }
+
+    private ChromeOptions getOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("start-maximized");
+        options.addArguments("start-fullscreen");
+        options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        return options;
     }
 
     private static Dimension getDimension () {

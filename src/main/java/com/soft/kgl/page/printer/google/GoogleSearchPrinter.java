@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
 
 public class GoogleSearchPrinter extends AbstractPagePrinter {
 
@@ -49,7 +48,7 @@ public class GoogleSearchPrinter extends AbstractPagePrinter {
 
     @Override
     protected void processImage (BufferedImage img) {
-        String fileName = String.format("/tmp/google-search-%s.png", LocalDateTime.now());
+        String fileName = String.format("google-search-%s", System.currentTimeMillis());
         FileUtils.saveImage(fileName, img);
     }
 }
