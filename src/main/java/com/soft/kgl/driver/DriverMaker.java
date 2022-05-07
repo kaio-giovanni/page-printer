@@ -1,6 +1,5 @@
 package com.soft.kgl.driver;
 
-import com.soft.kgl.utils.DotEnvUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +13,6 @@ public class DriverMaker {
     private final WebDriver webDriver;
 
     private DriverMaker () {
-        System.setProperty("webdriver.chrome.driver", DotEnvUtils.getChromeDriverUrl());
         this.webDriver = new ChromeDriver(getOptions());
         this.webDriver.manage().deleteAllCookies();
         this.webDriver.manage().window().setSize(getDimension());
@@ -28,11 +26,11 @@ public class DriverMaker {
         return instance;
     }
 
-    public WebDriver getWebDriver() {
+    public WebDriver getWebDriver () {
         return this.webDriver;
     }
 
-    private ChromeOptions getOptions() {
+    private ChromeOptions getOptions () {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("start-maximized");

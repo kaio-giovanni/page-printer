@@ -6,7 +6,6 @@ This project take screenshots of web pages using selenium and chrome driver.
 
 - Java ^11
 - Gradle ^6.8
-- Chrome driver
 
 ### Setup
 
@@ -16,29 +15,6 @@ This project take screenshots of web pages using selenium and chrome driver.
 git clone https://github.com/kaio-giovanni/page-printer.git
 cd page-printer
 gradle clean build
-```
-
-2. Install Chrome driver
-
-   2.1 Using docker
-
-   ```bash
-
-   docker pull selenium/standalone-chrome
-   docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
-   ```
-
-   2.2 Installing on ubuntu
-
-   ```bash
-
-   RUN apt-get install chromium-driver -y
-   ```
-
-3. Add path of chrome driver into .env file
-
-```
-CHROME_DRIVER_URL=http://localhost:4444/wd/hub
 ```
 
 ### Run
