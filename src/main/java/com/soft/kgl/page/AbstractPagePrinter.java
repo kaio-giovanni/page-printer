@@ -36,7 +36,12 @@ public abstract class AbstractPagePrinter implements IPagePrinter {
         Screenshot screenshot = takePrint(element);
         BufferedImage image = screenshot.getImage();
         processImage(image);
-        logger.info("Finalizing ...");
+        closeWebDriver();
+    }
+
+    private void closeWebDriver () {
+        logger.info("Closing web driver...");
+        webDriver.close();
     }
 
     private void navigateTo (String pagePath) {

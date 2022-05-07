@@ -2,8 +2,8 @@ package com.soft.kgl.page.printer.github;
 
 import com.soft.kgl.page.AbstractPagePrinter;
 import com.soft.kgl.utils.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -28,8 +28,8 @@ public class GithubProfilePrinter extends AbstractPagePrinter {
     @Override
     protected ExpectedCondition<Boolean> makeExpectedConditions () {
         return (driver -> ((JavascriptExecutor) driver)
-                        .executeScript("return document.readyState")
-                        .equals("complete"));
+                .executeScript("return document.readyState")
+                .equals("complete"));
     }
 
     @Override

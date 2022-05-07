@@ -22,12 +22,23 @@ repositories {
 }
 
 dependencies {
+    // selenium
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    // web driver manager
+	implementation 'io.github.bonigarcia:webdrivermanager:5.1.1'
+    // dotenv
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    // ashot
     implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
+    // picocli
     implementation 'info.picocli:picocli:4.6.1'
-    implementation group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+    // Slf4j
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    // Logback-classic
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+    // junit-jupiter-api
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    // junit-jupiter-engine
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 

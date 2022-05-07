@@ -30,6 +30,7 @@ out/
 .idea/**/markdown-navigator-enh.xml
 .idea/**/markdown-navigator/
 .idea/$CACHE_FILE$
+.vscode
 *.class
 *.log
 *.ctxt

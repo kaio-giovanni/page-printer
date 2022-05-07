@@ -8,11 +8,7 @@ public class DotEnvUtils {
             .ignoreIfMissing()
             .load();
 
-    private DotEnvUtils() {
-    }
-
-    public static String getChromeDriverUrl() {
-        return dotenv.get("CHROME_DRIVER_URL");
+    private DotEnvUtils () {
     }
 
 }

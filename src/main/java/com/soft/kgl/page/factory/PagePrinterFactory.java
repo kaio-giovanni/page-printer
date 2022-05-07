@@ -8,11 +8,11 @@ import com.soft.kgl.page.printer.google.GoogleSearchPrinter;
 
 public class PagePrinterFactory {
 
-    private PagePrinterFactory(){
+    private PagePrinterFactory () {
         // Do nothing
     }
 
-    public static AbstractPagePrinter getPagePrinter(PagesEnum pagesEnum) throws InvalidPagePrinterException {
+    public static AbstractPagePrinter getPagePrinter (PagesEnum pagesEnum) throws InvalidPagePrinterException {
         switch (pagesEnum) {
             case GITHUB_PROFILE:
                 return new GithubProfilePrinter();
